@@ -112,6 +112,10 @@
     gap: 15px
 }
 
+button {
+    border: none;
+}
+
 .main .bottom-info {
     font-size: 13px;
     margin: 15px auto;

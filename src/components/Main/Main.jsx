@@ -7,6 +7,13 @@ const Main = () => {
 
   const { onSent, recentPrompt, showResult, loading, resultData, setInput, input } = useContext(Context)
 
+  const handleSubmit = (e) => {
+    e.preventDefault();  // Prevents page reload on form submission
+    if (input) {
+      onSent(input);
+    }
+  };
+
   return (
     <div className='main'>
       <nav className='nav'>
@@ -30,7 +37,7 @@ const Main = () => {
                 <img src={assets.bulb_icon} alt="" />
               </div>
               <div className="card">
-                <p>Brainstrom the team bonding activities for our work retreat</p>
+                <p>Brainstorm team bonding activities for our work retreat</p>
                 <img src={assets.message_icon} alt="" />
               </div>
               <div className="card">
@@ -59,14 +66,22 @@ const Main = () => {
         }
 
         <div className="main-bottom">
-          <div className="search-box">
-            <input onChange={(e) => setInput(e.target.value)} value={input} id='search' type="text" placeholder='Enter a prompt here' />
+          <form onSubmit={handleSubmit} className="search-box">
+            <input
+              onChange={(e) => setInput(e.target.value)}
+              value={input}
+              id='search'
+              type="text"
+              placeholder='Enter a prompt here'
+            />
             <div>
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" />
-              {input && <img onClick={() => onSent(input)} src={assets.send_icon} alt="" />}
+              {input && <button type="submit">
+                <img src={assets.send_icon} alt="" />
+              </button>}
             </div>
-          </div>
+          </form>
           <p className="bottom-info">
             Gemini may display inaccurate info, including about people, so double-check its responses. Your privacy and Gemini Apps
           </p>
